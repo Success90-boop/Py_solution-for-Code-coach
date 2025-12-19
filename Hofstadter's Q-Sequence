@@ -1,0 +1,21 @@
+def hofstadter_q(n):
+    if n <= 0:
+        return 0
+    if n == 1 or n == 2:
+        return 1
+    
+    q = [0] * (n + 1)
+    q[1] = 1
+    q[2] = 1
+    
+    for i in range(3, n + 1):
+        idx1 = i - q[i - 1]
+        idx2 = i - q[i - 2]
+        # Bounds check to prevent index errors
+        q[i] = q[idx1] + q[idx2] if idx1 > 0 and idx2 > 0 else 0
+    
+    return q[n]
+
+# Read input and output result
+n = int(input().strip())
+print(hofstadter_q(n))
